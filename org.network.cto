@@ -1,0 +1,105 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ *
+ */
+
+namespace org.network
+
+participant Account identified by accountID {
+  o String accountID
+  o String name
+  o String accountCurrency
+  o String soldToCountry
+  o String API_code
+  // below are arrays of the two custom assets I have created: oppritunity and contract
+  o Oppritunity[] opprituniesOwned
+  o Contact[] contactsOwned
+}
+
+asset AccountLocation identified by locationID {
+  o String locationID
+  o String locationName
+  o String currency
+  o Account owner
+  o String apptusAPI default = "Apttus_Config2__AccountLocation__c"
+}
+
+asset Contact identified by contactID {
+  o String contactID
+  o String lastName
+  o String contactCurrency
+  o String API_code
+}
+
+asset billingPreference identified by billingPreferenceID {
+  o String billingPreferenceID
+  o String billingPreference
+  o String billingPreferenceAPI default = "Apttus_QPConfig__BillingPreferenceId__c"
+}
+
+asset Oppritunity identified by opptyID {
+  o String opptyID
+  o Gbt gbt 
+  o String name
+  o String nameAPI default = "Name"
+  o Account parentAccount
+  // This makes sense as Enum to me but i do not all the stages so for now it is  string
+  o String stage
+  o String stageAPI default = "StageName"
+  o DateTime closeDate
+  o Integer contractTerm
+  o String contractTermAPI default = "Contract_Term_Months__c"
+}
+
+asset Gbt identified by gbt_ID {
+  o String gbt_ID
+  o String name
+  o String currency
+  o String currencyISO default = "currencyIsoCode"
+  o String level
+  o String levelAPI default = "level_c"
+  o String code 
+  o String codeAPI default = "code_c" 
+  o String parent 
+  o String parentAPI default = "parent_c"
+}
+
+asset Proposal identified by proposalID {
+  o String proposalID
+  o DateTime presentedDate
+  o String presentedDateAPI default = "Apttus_Proposal__Presented_Date__c"
+  o DateTime endDate
+  o Account account
+  o String accountAPI default = "Apttus_Proposal__Valid_Until_Date__c"
+  o String distributionChannelAPI default = "APTS_Distribution_Channel__c"
+  o String currency
+  o String currencyIsoAPI default = "CurrencyIsoCode"
+  o String agreementType 
+  o String agreementTypeAPI default = "APTS_AgreementType__c"
+  o Contact primaryContact
+  o String primaryContactAPI default = "Apttus_Proposal__Primary_Contact__c"
+  o Account shipTo
+  o String shiptToIdAPI default= "Apttus_QPConfig__ShipToAccountId__c"
+  o Account billTo
+  o String billToIdAPI default = "Apttus_QPConfig__BillToAccountId__c"
+  o Contact billToContact
+  o String billToContactAPI default = "APTS_Bill_To_Contact__c"
+  o AccountLocation billToLocation
+  o String billToLocationAPI default = "APTS_Bill_To_Location__c"
+  o billingPreference billingPreference
+  o String paymentMethod
+  o String paymentMethodAPI default = "APTS_PaymentMethod__c"
+}
